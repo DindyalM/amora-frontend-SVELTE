@@ -11,7 +11,7 @@
 	</main>
 
 	<footer>
-	<h1>foot</h1>
+	<h4>more soon!</h4>
 	</footer>
 </div>
 

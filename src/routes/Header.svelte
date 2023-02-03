@@ -5,6 +5,6 @@
 </script>
 
 <header>
-	<h1>header</h1>
+<h1>welcome</h1>
 </header>
 
