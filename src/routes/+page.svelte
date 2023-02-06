@@ -39,7 +39,8 @@
 		<p>loading...</p>
 	{/each}
 </div>
-<h4>Cider</h4>
+
+<h3>Cider</h3>
 <div class="photos2">
 	{#each photos2 as photo}
 		<figure>
