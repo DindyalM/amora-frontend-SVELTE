@@ -18,6 +18,13 @@
 		photos2 = await res.json();
 	});
 
+	let photos3 =[]
+
+	onMount(async () => {
+		const res = await fetch(`https://amora-datapoint.herokuapp.com/f21`);
+		photos3 = await res.json();
+	});
+
 </script>
 
 <svelte:head>
@@ -26,7 +33,6 @@
 </svelte:head>
 
 <h4>Fashion nova</h4>
-
 <div class="photos">
 	{#each photos as photo}
 		<figure>
@@ -54,8 +60,22 @@
 	{/each}
 </div>
 
+<h3>Forever 21</h3>
+<div class="photos3">
+	{#each photos3 as photo}
+		<figure>
+		<a href ={photo.url2} rel ="noreferrer" target="_blank">
+				<img src={photo.url} width=300 height=300>
+		</a>
+		</figure>
+	{:else}
+		<!-- this block renders when photos.length === 0 -->
+		<p>loading...</p>
+	{/each}
+</div>
+
 <style>
-	.photos,.photos2 {
+	.photos,.photos2,.photos3 {
 		width: 100%;
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
