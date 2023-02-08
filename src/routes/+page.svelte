@@ -74,7 +74,7 @@
 	{/each}
 </div>
 
-<style>
+<style lang="postcss">
 	.photos,.photos2,.photos3 {
 		width: 100%;
 		display: grid;

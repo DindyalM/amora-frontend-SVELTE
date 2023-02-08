@@ -1,6 +1,6 @@
 <script>
 	import Header from './Header.svelte';
-	import './styles.css';
+	import "../app.css";
 </script>
 
 <div class="app">
@@ -11,7 +11,7 @@
 	</main>
 
 	<footer>
-	<h4>more soon!</h4>
+	<h4 class= "text-3xl font-bold underline">more soon!</h4>
 	</footer>
 </div>
 
