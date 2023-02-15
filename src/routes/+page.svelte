@@ -1,11 +1,21 @@
 <script>
 	import { onMount } from 'svelte';
-	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import {fashion} from "../stores.js";
+	import {browser} from "$app/environment"
+
+
+
+  import { writable } from "svelte/store";
+  let store = writable(window.localStorage.getItem("store") || "");
+
+  // store.subscribe(val => localStorage.setItem("store", val));
+
+
 
 	let photos = [];
-
+	
 	onMount(async () => {
 		const res = await fetch(`https://amora-datapoint.herokuapp.com/`);
 		photos = await res.json();
@@ -32,7 +42,7 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<h4>Fashion nova</h4>
+<h4></h4>
 <div class="photos">
 	{#each photos as photo}
 		<figure>
