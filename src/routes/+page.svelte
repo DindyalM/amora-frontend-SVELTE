@@ -1,30 +1,82 @@
 <script>
-	import { onMount } from 'svelte';
-	import Counter from './Counter.svelte';
+	import { onMount,onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 
 	let photos = [];
-
 	onMount(async () => {
-		const res = await fetch(`https://amora-datapoint.herokuapp.com/`);
-		photos = await res.json();
-	});
+		if (browser) {
+      const localStorageData = localStorage.getItem('fn');
+      if (localStorageData) {
+        photos = JSON.parse(localStorageData);
+      } else {
+        try {
+          const res = await fetch(`https://amora-datapoint.herokuapp.com/`);
+          const data = await res.json();
 
-	let photos2 =[]
+					if(data!==[]){
+          	localStorage.setItem('fn', JSON.stringify(data));
+					}
 
-	onMount(async () => {
-		const res = await fetch(`https://amora-datapoint.herokuapp.com/cider`);
-		photos2 = await res.json();
-	});
+          photos = data;
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    }
+  });
+
+	let photos2 = [];
+  onMount(async () => {
+    if (browser) {
+      const localStorageData = localStorage.getItem('cider');
+      if (localStorageData) {
+        photos2 = JSON.parse(localStorageData);
+      } else {
+        try {
+          const res = await fetch(`https://amora-datapoint.herokuapp.com/cider`);
+          const data = await res.json();
+					if(data!=[]){
+          	localStorage.setItem('cider', JSON.stringify(data));
+					}
+          photos2 = data;
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    }
+  });
 
 	let photos3 =[]
 
 	onMount(async () => {
-		const res = await fetch(`https://amora-datapoint.herokuapp.com/f21`);
-		photos3 = await res.json();
-	});
+    if (browser) {
+      const localStorageData = localStorage.getItem('f21');
+      if (localStorageData) {
+        photos3 = JSON.parse(localStorageData);
+      } else {
+        try {
+          const res = await fetch(`https://amora-datapoint.herokuapp.com/f21`);
+          const data = await res.json();
+					if(data!=[]){
+          	localStorage.setItem('f21', JSON.stringify(data));
+					}
+          photos3 = data;
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    }
+  });
+onDestroy(() => {
+	if (browser){
+  	localStorage.removeItem('cider');
+  	localStorage.removeItem('f21');
+  	localStorage.removeItem('fn');
 
+	}
+});
 </script>
 
 <svelte:head>
@@ -48,16 +100,16 @@
 
 <h3>Cider</h3>
 <div class="photos2">
-	{#each photos2 as photo}
-		<figure>
-		<a href ={photo.url2} rel ="noreferrer" target="_blank">
-				<img src={photo.url} alt={photo.title} width=300 height=300>
-		</a>
-		</figure>
-	{:else}
+    {#each photos2 as photo}
+     <figure>
+     <a href ={photo.url2} rel ="noreferrer" target="_blank">
+         <img src={photo.url} alt={photo.title} width=300 height=300>
+     </a>
+     </figure>
+		 {:else}
 		<!-- this block renders when photos.length === 0 -->
 		<p>loading...</p>
-	{/each}
+    {/each}
 </div>
 
 <h3>Forever 21</h3>
