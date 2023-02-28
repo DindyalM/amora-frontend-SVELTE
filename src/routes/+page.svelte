@@ -5,7 +5,6 @@
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 
 let photos = [];
-
 onMount(async () => {
   if (browser) {
     const localStorageData = localStorage.getItem('fn');
@@ -21,7 +20,7 @@ onMount(async () => {
         const data = await res.json();
 
         if (data !== []) {
-          const expiration = Date.now() + 24 * 60 * 60 * 1000; // set expiration time to 24 hours from now
+          const expiration = Date.now() + 1 * 60 * 60 * 1000; // set expiration time to 24 hours from now
           localStorage.setItem('fn', JSON.stringify({ data, expiration }));
         }
 
@@ -49,7 +48,7 @@ onMount(async () => {
         const data = await res.json();
 
         if (data !== []) {
-          const expiration = Date.now() + 24 * 60 * 60 * 1000; // set expiration time to 24 hours from now
+          const expiration = Date.now() + 1 * 60 * 60 * 1000; // set expiration time to 24 hours from now
           localStorage.setItem('cider', JSON.stringify({ data, expiration }));
         }
 
@@ -77,7 +76,7 @@ onMount(async () => {
         const data = await res.json();
 
         if (data !== []) {
-          const expiration = Date.now() + 24 * 60 * 60 * 1000; // set expiration time to 24 hours from now
+          const expiration = Date.now() + 1 * 60 * 60 * 1000; // set expiration time to 24 hours from now
           localStorage.setItem('f21', JSON.stringify({ data, expiration }));
         }
 
@@ -89,8 +88,6 @@ onMount(async () => {
   }
 });
 
-
-	
 onDestroy(() => {
 	if (browser){
   	localStorage.removeItem('cider');
@@ -103,7 +100,7 @@ onDestroy(() => {
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="a website the scrapes fashion nova and cide and forever 21" content="Amora" />
 </svelte:head>
 
 <h4>Fashion nova</h4>
