@@ -103,60 +103,52 @@ onDestroy(() => {
 	<meta name="a website the scrapes fashion nova and cide and forever 21" content="Amora" />
 </svelte:head>
 
-<h4>Fashion nova</h4>
-<div class="photos">
-	{#each photos as photo}
-		<figure>
-		<a href ={photo.url2} rel ="noreferrer" target="_blank">
-				<img src={photo.url} alt={photo.title} width=300 height=300>
-		</a>
-		</figure>
-	{:else}
-		<!-- this block renders when photos.length === 0 -->
-		<p>loading...</p>
-	{/each}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <h4 class="text-center font-bold text-lg p-4 bg-gray-100">Fashion Nova</h4>
+    <div class="p-4">
+      {#each photos as photo}
+        <figure class="mb-4">
+          <a href={photo.url2} rel="noreferrer" target="_blank">
+            <img src={photo.url} alt={photo.title} class="w-full h-auto md:h-96 object-cover">
+          </a>
+        </figure>
+      {:else}
+        <p class="text-center">Loading...</p>
+      {/each}
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <h4 class="text-center font-bold text-lg p-4 bg-gray-100">Cider</h4>
+    <div class="p-4">
+      {#each photos2 as photo}
+        <figure class="mb-4">
+          <a href={photo.url2} rel="noreferrer" target="_blank">
+            <img src={photo.url} alt={photo.title} class="w-full h-auto md:h-96 object-cover">
+          </a>
+        </figure>
+      {:else}
+        <p class="text-center">Loading...</p>
+      {/each}
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <h4 class="text-center font-bold text-lg p-4 bg-gray-100">Forever 21</h4>
+    <div class="p-4">
+      {#each photos3 as photo}
+        <figure class="mb-4">
+          <a href={photo.url2} rel="noreferrer" target="_blank">
+            <img src={photo.url} alt={photo.title} class="w-full h-auto md:h-96 object-cover">
+          </a>
+        </figure>
+      {:else}
+        <p class="text-center">Loading...</p>
+      {/each}
+    </div>
+  </div>
 </div>
 
-<h3>Cider</h3>
-<div class="photos2">
-    {#each photos2 as photo}
-     <figure>
-     <a href ={photo.url2} rel ="noreferrer" target="_blank">
-         <img src={photo.url} alt={photo.title} width=300 height=300>
-     </a>
-     </figure>
-		 {:else}
-		<!-- this block renders when photos.length === 0 -->
-		<p>loading...</p>
-    {/each}
-</div>
-
-<h3>Forever 21</h3>
-<div class="photos3">
-	{#each photos3 as photo}
-		<figure>
-		<a href ={photo.url2} rel ="noreferrer" target="_blank">
-				<img src={photo.url} width=300 height=300>
-		</a>
-		</figure>
-	{:else}
-		<!-- this block renders when photos.length === 0 -->
-		<p>loading...</p>
-	{/each}
-</div>
-
-<style lang="postcss">
-	.photos,.photos2,.photos3 {
-		width: 100%;
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		grid-gap: 8px;
-	}
-
-	figure, img {
-		width: 100%;
-		margin: 0;
-	}
-</style>
 
 
