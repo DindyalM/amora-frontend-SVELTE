@@ -4,71 +4,93 @@
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 
-	let photos = [];
-	onMount(async () => {
-		if (browser) {
-      const localStorageData = localStorage.getItem('fn');
-      if (localStorageData) {
-        photos = JSON.parse(localStorageData);
-      } else {
-        try {
-          const res = await fetch(`https://amora-datapoint.herokuapp.com/`);
-          const data = await res.json();
+let photos = [];
 
-					if(data!==[]){
-          	localStorage.setItem('fn', JSON.stringify(data));
-					}
-
-          photos = data;
-        } catch (err) {
-          console.log(err)
-        }
+onMount(async () => {
+  if (browser) {
+    const localStorageData = localStorage.getItem('fn');
+    if (localStorageData) {
+      const { data, expiration } = JSON.parse(localStorageData);
+      if (Date.now() < expiration) {
+        photos = data;
       }
     }
-  });
+    if (!photos.length) {
+      try {
+        const res = await fetch(`https://amora-datapoint.herokuapp.com/`);
+        const data = await res.json();
 
-	let photos2 = [];
-  onMount(async () => {
-    if (browser) {
-      const localStorageData = localStorage.getItem('cider');
-      if (localStorageData) {
-        photos2 = JSON.parse(localStorageData);
-      } else {
-        try {
-          const res = await fetch(`https://amora-datapoint.herokuapp.com/cider`);
-          const data = await res.json();
-					if(data!=[]){
-          	localStorage.setItem('cider', JSON.stringify(data));
-					}
-          photos2 = data;
-        } catch (err) {
-          console.log(err)
+        if (data !== []) {
+          const expiration = Date.now() + 24 * 60 * 60 * 1000; // set expiration time to 24 hours from now
+          localStorage.setItem('fn', JSON.stringify({ data, expiration }));
         }
+
+        photos = data;
+      } catch (err) {
+        console.log(err)
       }
     }
-  });
+  }
+});
 
-	let photos3 =[]
-
-	onMount(async () => {
-    if (browser) {
-      const localStorageData = localStorage.getItem('f21');
-      if (localStorageData) {
-        photos3 = JSON.parse(localStorageData);
-      } else {
-        try {
-          const res = await fetch(`https://amora-datapoint.herokuapp.com/f21`);
-          const data = await res.json();
-					if(data!=[]){
-          	localStorage.setItem('f21', JSON.stringify(data));
-					}
-          photos3 = data;
-        } catch (err) {
-          console.log(err)
-        }
+let photos2 = [];
+onMount(async () => {
+  if (browser) {
+    const localStorageData = localStorage.getItem('cider');
+    if (localStorageData) {
+      const { data, expiration } = JSON.parse(localStorageData);
+      if (Date.now() < expiration) {
+        photos2 = data;
       }
     }
-  });
+    if (!photos2.length) {
+      try {
+        const res = await fetch(`https://amora-datapoint.herokuapp.com/cider`);
+        const data = await res.json();
+
+        if (data !== []) {
+          const expiration = Date.now() + 24 * 60 * 60 * 1000; // set expiration time to 24 hours from now
+          localStorage.setItem('cider', JSON.stringify({ data, expiration }));
+        }
+
+        photos2 = data;
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+});
+
+let photos3 =[];
+onMount(async () => {
+  if (browser) {
+    const localStorageData = localStorage.getItem('f21');
+    if (localStorageData) {
+      const { data, expiration } = JSON.parse(localStorageData);
+      if (Date.now() < expiration) {
+        photos3 = data;
+      }
+    }
+    if (!photos3.length) {
+      try {
+        const res = await fetch(`https://amora-datapoint.herokuapp.com/f21`);
+        const data = await res.json();
+
+        if (data !== []) {
+          const expiration = Date.now() + 24 * 60 * 60 * 1000; // set expiration time to 24 hours from now
+          localStorage.setItem('f21', JSON.stringify({ data, expiration }));
+        }
+
+        photos3 = data;
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+});
+
+
+	
 onDestroy(() => {
 	if (browser){
   	localStorage.removeItem('cider');
