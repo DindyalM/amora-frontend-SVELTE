@@ -110,7 +110,7 @@ onDestroy(() => {
       {#each photos as photo}
         <figure class="mb-4">
           <a href={photo.url2} rel="noreferrer" target="_blank">
-            <img src={photo.url} alt={photo.title} class="w-full h-auto md:h-96 object-cover">
+            <img src={photo.url} alt={photo.title} class="w-full h-auto md:max-w-none object-cover">
           </a>
         </figure>
       {:else}
@@ -125,7 +125,7 @@ onDestroy(() => {
       {#each photos2 as photo}
         <figure class="mb-4">
           <a href={photo.url2} rel="noreferrer" target="_blank">
-            <img src={photo.url} alt={photo.title} class="w-full h-auto md:h-96 object-cover">
+            <img src={photo.url} alt={photo.title} class="w-full h-auto md:max-w-none object-cover">
           </a>
         </figure>
       {:else}
@@ -140,7 +140,7 @@ onDestroy(() => {
       {#each photos3 as photo}
         <figure class="mb-4">
           <a href={photo.url2} rel="noreferrer" target="_blank">
-            <img src={photo.url} alt={photo.title} class="w-full h-auto md:h-96 object-cover">
+            <img src={photo.url} alt={photo.title} class="w-full h-auto md:max-w-none object-cover">
           </a>
         </figure>
       {:else}
@@ -149,6 +149,8 @@ onDestroy(() => {
     </div>
   </div>
 </div>
+
+
 
 
 
