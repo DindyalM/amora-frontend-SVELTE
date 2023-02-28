@@ -11,7 +11,9 @@ onMount(async () => {
     if (localStorageData) {
       const { data, expiration } = JSON.parse(localStorageData);
       if (Date.now() < expiration) {
-        photos = data;
+        if(data.length){
+         photos = data;
+        }
       }
     }
     if (!photos.length) {
@@ -39,7 +41,9 @@ onMount(async () => {
     if (localStorageData) {
       const { data, expiration } = JSON.parse(localStorageData);
       if (Date.now() < expiration) {
-        photos2 = data;
+        if(data.length){
+         photos2 = data;
+        }
       }
     }
     if (!photos2.length) {
@@ -67,7 +71,9 @@ onMount(async () => {
     if (localStorageData) {
       const { data, expiration } = JSON.parse(localStorageData);
       if (Date.now() < expiration) {
-        photos3 = data;
+       if(data.length){
+         photos3 = data;
+        }
       }
     }
     if (!photos3.length) {
